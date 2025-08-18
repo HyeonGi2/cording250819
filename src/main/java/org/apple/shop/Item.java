@@ -1,8 +1,10 @@
 package org.apple.shop;
 
 import jakarta.persistence.*;
+import lombok.ToString;
 
 @Entity
+@ToString
 public class Item {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
@@ -13,5 +15,9 @@ public class Item {
 
     //DB 데이터 입출력은 3단계
     //.findAll 쓰면 List에 담아서 가져온다.
+
+//    public String toString() {
+//        return this.title + this.price;
+//    }  또는 어노테이션에 @ToString
 
 }
