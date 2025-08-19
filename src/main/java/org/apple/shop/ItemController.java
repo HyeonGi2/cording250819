@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -66,8 +67,25 @@ public class ItemController {
 //        return "redirect:/list";  //전송 누르면 서버로 데이터 전송
 //    }
 
+    // 서버 이상없을시 db에 저장하기
+    @PostMapping("/add")
+    String addPost(String title, Integer price) {
 
+        Item item = new Item();
+        item.setTitle(title);
+        item.setPrice(price);
+        itemRepository.save(item);
+        System.out.println(item);
+        return "redirect:/list";
+    }
 
+// 서버 이상 없을시 db에 저장하기2
+//    @PostMapping("/add")
+//    String addPost(@ModelAttribute Item item) {
+//        System.out.println(item);
+//        itemRepository.save(item);
+//        return "redirect:/list";
+//    }
 
 
 
