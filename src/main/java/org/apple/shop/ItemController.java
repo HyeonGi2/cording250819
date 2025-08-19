@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,8 @@ public class ItemController {
         var a = new Item();  // Item.java 에 toString 부분
         System.out.println(a.toString());  // Item.java 에 toString 부분 오브젝트 한눈에 보기
         return "list.html";
+
+
 
 
 
@@ -49,4 +53,24 @@ public class ItemController {
 
         //jpa로 데이터 입출력하기 1. 리포지터리만들기
     }
+
+    @GetMapping("/write")
+    String write() {
+        return "write.html";
+    }
+
+//    @PostMapping("/add") // add 는 명사로 변경하면 좋다
+//    String addPost(@RequestParam String title,@RequestParam String price) {
+//        System.out.println(title);
+//        System.out.println(price);
+//        return "redirect:/list";  //전송 누르면 서버로 데이터 전송
+//    }
+
+
+
+
+
+
+
+
 }
