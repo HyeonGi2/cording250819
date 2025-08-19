@@ -25,9 +25,6 @@ public class ItemController {
         return "list.html";
 
 
-
-
-
 //        var result = itemRepository.findAll(); //itemRepository.save();
 //        //List<Item> result = itemRepository.findAll();
 //        System.out.println(result);
@@ -46,8 +43,6 @@ public class ItemController {
 //        System.out.println(result.get(0).title);
 
         //ArrayList<Object> a = new ArrayList<>();
-
-
 
 
         //jpa로 데이터 입출력하기 1. 리포지터리만들기
@@ -100,6 +95,7 @@ public class ItemController {
 //    }
 
 //                        url 파라미터 여러개 사용가능 작명 원하는단어로
+  /*
     @GetMapping("/detail/{id}")
     String detail() {
 //        var  result = itemRepository.findById(1L);
@@ -111,7 +107,21 @@ public class ItemController {
         }
             return "detail.html";
         }
+        */
 
+    // detail/1 또는 2에 접속하면 그에 맞는 아이디값 데이터 가져오기
+    @GetMapping("/detail/{id}")
+    String detail(@PathVariable Long id, Model model) {
 
+        Optional<Item> result = itemRepository.findById(id);
+        if (result.isPresent()) {
 
+            model.addAttribute("data", result.get());
+            return "detail.html";
+        } else {
+            return "redirect:/list";
+
+        }
+
+    }
 }
