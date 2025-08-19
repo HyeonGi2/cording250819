@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -88,6 +86,31 @@ public class ItemController {
 //    }
 
 
+    // 이런식으로 상품개수가 100개라면 100개 제작할 필요 x url 파라미터 문법사용하기
+//    @PostMapping("/detail/1")
+//    String addPost() {
+//
+//        return "redirect:/list";
+//    }
+
+//    @PostMapping("/detail/2")
+//    String addPost() {
+//
+//        return "redirect:/list";
+//    }
+
+//                        url 파라미터 여러개 사용가능 작명 원하는단어로
+    @GetMapping("/detail/{id}")
+    String detail() {
+//        var  result = itemRepository.findById(1L);
+        Optional<Item> result = itemRepository.findById(1L);
+        if (result.isPresent()) {
+//        result.get(); result가 비어있다면 오류 발생 if문 사용
+            System.out.println(result.get());
+            // Optional 사용이유는 100번째 데이터가 없을경우 대비
+        }
+            return "detail.html";
+        }
 
 
 
