@@ -1,12 +1,12 @@
 package org.apple.shop;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +69,9 @@ public class ItemController {
         item.setPrice(price);
         itemRepository.save(item);
         System.out.println(item);
+
+
+
         return "redirect:/list";
     }
 
@@ -111,17 +114,38 @@ public class ItemController {
 
     // detail/1 또는 2에 접속하면 그에 맞는 아이디값 데이터 가져오기
     @GetMapping("/detail/{id}")
-    String detail(@PathVariable Long id, Model model) {
-
-        Optional<Item> result = itemRepository.findById(id);
-        if (result.isPresent()) {
-
-            model.addAttribute("data", result.get());
-            return "detail.html";
-        } else {
-            return "redirect:/list";
-
-        }
-
+    String detail(@PathVariable Long id, Model model) throws Exception {
+        throw new Exception();
     }
+
+//        ResponseEntity<String> detail(@PathVariable Long id, Model model) {
+
+//            Optional<Item> result = itemRepository.findById(id);
+//            if (result.isPresent()) {
+//
+//                model.addAttribute("data", result.get());
+//                return "detail.html";
+//            } else {
+//                return "redirect:/list";
+//
+//            }
+//
+//        }
+//            return "redirect:/list";
+//            return ResponseEntity.status(400).body("에러");
+        //유저 오류 4XX 서버 오류 5XX 정상 200 http status code 가이드 참조
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("에러");
+
+
+//      모든 api에서 Exception 발생 시 코드 실행
+//        @ExceptionHandler(Exception.class)
+//        public void handler() {
+//        return ResponseEntity.status().body();
+
+//       번거로우면 파일로 직접 따로생성
+
+
+
+
 }
+
